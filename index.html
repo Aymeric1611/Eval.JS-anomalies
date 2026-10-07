@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlitchZero — Registre des Anomalies Mystiques</title>
+  <meta name="description" content="Application de gestion de la dette technique mystique et des bugs légendaires de la startup GlitchZero.">
+  
+  <!-- Polices Google Fonts modernes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Conteneur global avec fond étoilé / mystique -->
+  <div class="app-wrapper">
+    
+    <!-- BANDEAU D'EN-TÊTE SÉMANTIQUE -->
+    <header class="main-header">
+      <div class="header-branding">
+        <div class="logo-badge">
+          <span class="logo-icon">👾</span>
+          <span class="logo-pulse"></span>
+        </div>
+        <div>
+          <div class="brand-tag">Startup GlitchZero &bull; Dette Technique Mystique</div>
+          <h1 class="main-title">Registre des Anomalies</h1>
+        </div>
+      </div>
+
+      <!-- TABLEAU DE BORD / STATISTIQUES (AVEC BONUS CAGNOTTE) -->
+      <div class="header-stats">
+        <div class="stat-card">
+          <span class="stat-label">Anomalies visibles</span>
+          <div class="stat-value-container">
+            <span id="counter-bugs" class="stat-value">0</span>
+            <span class="stat-subtext">tickets</span>
+          </div>
+        </div>
+
+        <div class="stat-card stat-card-gold">
+          <span class="stat-label">Cagnotte de primes (Bonus)</span>
+          <div class="stat-value-container">
+            <span id="total-bounty" class="stat-value">0</span>
+            <span class="stat-currency">pts ⚡</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ZONE PRINCIPALE SÉMANTIQUE -->
+    <main class="main-layout">
+      
+      <!-- COLONNE 1 : FORMULAIRE D'AJOUT -->
+      <aside class="sidebar-section">
+        <section class="form-container">
+          <div class="section-header">
+            <h2 class="section-title">Signaler une anomalie</h2>
+            <p class="section-subtitle">Immortalisez un bug insolite en production</p>
+          </div>
+
+          <form id="bug-form" class="bug-form" novalidate>
+            <div class="form-group">
+              <label for="bug-titre" class="form-label">
+                Titre de l'anomalie <span class="required">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="bug-titre" 
+                name="titre" 
+                class="form-control" 
+                placeholder="Ex: Le CSS fantôme de 3h du matin..." 
+                required
+              >
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bug-auteur" class="form-label">
+                  Auteur / Déclarant <span class="required">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="bug-auteur" 
+                  name="auteur" 
+                  class="form-control" 
+                  placeholder="Ex: Alexandre" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="bug-severite" class="form-label">
+                  Sévérité <span class="required">*</span>
+                </label>
+                <select id="bug-severite" name="severite" class="form-control" required>
+                  <option value="Basse">Basse</option>
+                  <option value="Moyenne" selected>Moyenne</option>
+                  <option value="Critique">Critique</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bug-recompense" class="form-label">
+                Récompense fictive (pts)
+              </label>
+              <div class="input-with-icon">
+                <input 
+                  type="number" 
+                  id="bug-recompense" 
+                  name="recompense" 
+                  class="form-control" 
+                  min="0" 
+                  step="5" 
+                  placeholder="Ex: 100"
+                  value="50"
+                >
+                <span class="input-icon">⚡</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bug-description" class="form-label">
+                Description du phénomène
+              </label>
+              <textarea 
+                id="bug-description" 
+                name="description" 
+                class="form-control textarea" 
+                rows="4" 
+                placeholder="Décrivez les conditions surnaturelles d'apparition du bug..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn">
+              <span class="btn-icon">✨</span>
+              <span>Publier l'anomalie</span>
+            </button>
+          </form>
+        </section>
+      </aside>
+
+      <!-- COLONNE 2 : RECHERCHE, FILTRES & GRILLE DE CARTES -->
+      <section class="content-section">
+        
+        <!-- BARRE DE CONTRÔLES (RECHERCHE BONUS & FILTRES SÉVÉRITÉ) -->
+        <div class="controls-card">
+          <!-- CHAMP DE RECHERCHE TEXTUELLE (BONUS) -->
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              id="search-input" 
+              class="search-input" 
+              placeholder="Recherche par mot-clé (titre, description)..."
+              aria-label="Recherche textuelle d'anomalies"
+            >
+            <button type="button" id="btn-clear-search" class="clear-search-btn" title="Effacer la recherche" hidden>&times;</button>
+          </div>
+
+          <!-- BARRE DE FILTRAGE DES 4 BOUTONS -->
+          <div class="filter-wrapper">
+            <span class="filter-label">Sévérité :</span>
+            <div id="filter-bar" class="filter-bar" role="toolbar" aria-label="Filtres de sévérité">
+              <button type="button" class="btn-filter active" data-filter="Tous">
+                Tous
+              </button>
+              <button type="button" class="btn-filter" data-filter="Critique">
+                <span class="filter-dot dot-critique"></span>
+                Critique
+              </button>
+              <button type="button" class="btn-filter" data-filter="Moyenne">
+                <span class="filter-dot dot-moyenne"></span>
+                Moyenne
+              </button>
+              <button type="button" class="btn-filter" data-filter="Basse">
+                <span class="filter-dot dot-basse"></span>
+                Basse
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENEUR PRINCIPAL ATTENDU : #bug-grid -->
+        <div id="bug-grid" class="bug-grid" aria-live="polite">
+          <!-- Les cartes (<article class="card">) seront injectées dynamiquement ici via JS -->
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER SÉMANTIQUE -->
+    <footer class="main-footer">
+      <p>GlitchZero &copy; 2026 &bull; BTS SIO 2ème Année &bull; TP JavaScript — Le Registre des Anomalies Mystiques</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
